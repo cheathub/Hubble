@@ -11,5 +11,7 @@ virtualenv -p python3 venv
 source venv/bin/activate
 pip install pygithub
 
-python hubble.py
+python hub.py -t audeSt
 ```
+
+You can uncomment `#g = CheatHub('YOUR_GITHUB_TOKEN')` in `hub.py` and use your own GitHub token.
