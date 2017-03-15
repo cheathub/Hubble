@@ -11,7 +11,11 @@ virtualenv -p python3 venv
 source venv/bin/activate
 pip install pygithub
 
-python hub.py -t audeSt
+python hub.py -k YOUR_GITHUB_TOKEN -t ReenStick
 ```
 
-You can uncomment `#g = CheatHub('YOUR_GITHUB_TOKEN')` in `hub.py` and use your own GitHub token.
+## Recheck
+
+```
+python hub.py -k YOUR_GITHUB_TOKEN -x
+```

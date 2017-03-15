@@ -1,9 +1,7 @@
 import argparse
+import datetime
 from cache import cache
 from cheathub import CheatHub
-
-#g = CheatHub('YOUR_GITHUB_TOKEN')
-g = CheatHub()
 
 
 def track_user(stargazer):
@@ -45,11 +43,27 @@ if __name__ == "__main__":
                         help="track cheat users from USER", metavar="USER")
     parser.add_argument("-r", "--repo", dest="repo",
                         help="track cheat users from REPO", metavar="REPO")
+    parser.add_argument("-k", "--token", dest="token",
+                        help="GitHub TOKEN", metavar="TOKEN")
+    parser.add_argument("-x", "--recheck", action="store_true",
+                        help="recheck log.md")
+    parser.add_argument("-v", "--version", action="version", version='%(prog)s 1.0.1',
+                        help="show version")
     args = parser.parse_args()
+
+    g = CheatHub()
+
+    if args.token:
+        g = CheatHub(args.token)
+        cache.token = args.token
 
     if args.bait:
         track(args.bait)
     elif args.repo:
         print(args.repo)
+    elif args.recheck:
+        cache.load_markdown()
+        cache.recheck()
+        cache.markdown(log='./log_' + datetime.datetime.now().strftime("%Y%m%d-%H-%M") + '.md')
     else:
         parser.print_help()
